@@ -4,8 +4,13 @@ import {
 
 describe('ui-inventory: Derive MARC', () => {
   before('logs in and navigates to Inventory', () => {
+    cy.visit('/');
     cy.login('diku_admin', 'admin');
     cy.visit('/inventory');
+  });
+
+  after(() => {
+    cy.logout();
   });
 
   describe('deriving a MARC record', () => {
@@ -49,8 +54,13 @@ describe('ui-inventory: Derive MARC', () => {
 
 describe('ui-inventory: MARC default subfield', () => {
   before('logs in and navigates to Inventory', () => {
+    cy.visit('/');
     cy.login('diku_admin', 'admin');
     cy.visit('/inventory');
+  });
+
+  after(() => {
+    cy.logout();
   });
 
   describe('editing a MARC record', () => {
@@ -108,8 +118,13 @@ describe('ui-inventory: MARC default subfield', () => {
 
 describe('ui-inventory: MARC 006/00 field', () => {
   before('logs in and navigates to Inventory', () => {
+    cy.visit('/');
     cy.login('diku_admin', 'admin');
     cy.visit('/inventory');
+  });
+
+  after(() => {
+    cy.logout();
   });
 
   describe('editing a MARC record', () => {

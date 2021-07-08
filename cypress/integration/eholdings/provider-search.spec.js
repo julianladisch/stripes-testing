@@ -1,7 +1,14 @@
+import { Link } from '../../../interactors';
+
 describe('ui-eholdings: Search providers', () => {
   before('logs in and navigates to eHoldings', () => {
+    cy.visit('/');
     cy.login('diku_admin', 'admin');
-    cy.visit('/eholdings');
+    cy.do(Link('eHoldings').click());
+  });
+
+  after(() => {
+    cy.logout();
   });
 
   describe('searching by provider name', () => {
