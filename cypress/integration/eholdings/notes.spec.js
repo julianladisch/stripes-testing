@@ -1,5 +1,7 @@
 import { Accordion, Button, Checkbox, HTML, including, Link, matching, Modal, MultiColumnList, MultiColumnListCell, not, Page, RichEditor, TextField } from '../../../interactors';
 
+const createNoteTitle = () => `[e2e] Note created at ${Date.now()}`;
+
 describe('ui-eholdings: Notes', () => {
   before('logs in and navigates to eHoldings', () => {
     cy.visit('/');
@@ -27,7 +29,7 @@ describe('ui-eholdings: Notes', () => {
       });
 
       describe('filling in data', () => {
-        const noteTitle = `[e2e] Note created at ${Date.now()}`;
+        const noteTitle = createNoteTitle();
 
         before(() => {
           cy.do([
@@ -109,13 +111,28 @@ describe('ui-eholdings: Notes', () => {
 
       describe('searching unassigned notes', () => {
         before(() => {
+          cy.visit('/eholdings');
+          cy.search('EBSCO');
+
+          // create a note in another provider so we have unassigned notes for first provider
           cy.do([
-            Checkbox('Assigned').click(),
-            Checkbox('Assign / Unassign all notes').click(), // FIXME: This checkbox is disabled and real user can't click on it, but the interactor can
-            Button('Save').click(),
-            Button('Assign / Unassign').click(),
-            Checkbox('Unassigned').click()
+            Link(including('EBSCO Open Access Lists\n')).click(),
+            Accordion('Notes').find(Button('New')).click(),
+            TextField(including('Note title')).fillIn(createNoteTitle()),
+            RichEditor('Details').fillIn('Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor.'),
+            Button('Save & close').click(),
           ]);
+          cy.expect(Page.has({ url: including('eholdings/providers') }));
+          cy.visit('/eholdings');
+          cy.search('EBSCO');
+          cy.do([
+            Link(including('EBSCO\n')).click(),
+            Button('Assign / Unassign').click(),
+            Checkbox('Unassigned').click(),
+            Checkbox('Assign / Unassign all notes').click(), // FIXME: This checkbox is disabled and real user can't click on it, but the interactor can
+            Button('Save').click()
+          ]);
+          cy.do(Button('Assign / Unassign').click());
         });
 
         // FIXME: This test should fail because notes can't be unassigned
