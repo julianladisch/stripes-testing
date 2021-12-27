@@ -9,7 +9,7 @@ describe('ui-inventory: actions', () => {
     cy.visit(TopMenu.inventoryPath);
   });
 
-  it('C196752 verifies action menu options before any search is conducted', () => {
+  it('C196752 verifies action menu options', () => {
     cy.do(InventoryActions.open());
 
     cy.expect(InventorySearch.getAllSearchResults().absent());
