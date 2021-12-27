@@ -23,7 +23,7 @@ export { default as Layer } from './layer';
 export { default as List, ListItem } from './list';
 export { default as MessageBanner, MessageBannerTypes } from './messagebanner';
 export { default as Modal } from './modal';
-export { MultiColumnList, MultiColumnListRow, MultiColumnListCell } from './multi-column-list';
+export { MultiColumnList, MultiColumnListRow, MultiColumnListCell, MultiColumnListHeader } from './multi-column-list';
 export { default as MultiSelect, MultiSelectMenu, MultiSelectOption } from './multi-select';
 export { default as Pane, PaneHeader } from './pane';
 export { default as RadioButton } from './radio-button';
@@ -37,5 +37,10 @@ export { default as TextField } from './text-field';
 export { default as TextArea } from './textarea';
 export { Tooltip, TooltipProximity } from './tooltip';
 export { dispatchFocusout } from './util';
-export { default as QuickMarkEditorRow } from './quickMarcEditorRow';
-export { default as QuickMarkEditor } from './quickMarcEditor';
+export { default as QuickMarcEditorRow } from './quickMarcEditorRow';
+export { default as QuickMarcEditor } from './quickMarcEditor';
+export { default as Section } from './section';
+
+// Stripes-smart-component interactors
+export { AddressList, AddressEdit, AddressItem } from './address-edit-list';
+export { EditableList, EditableListRow, ColumnHeader } from './editablelist';
